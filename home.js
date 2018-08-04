@@ -3,7 +3,7 @@ class Home extends React.Component {
     super();
     this.state = {
       query: "",
-      movies: []
+      hasSearched: false
     };
   }
 
@@ -11,20 +11,24 @@ class Home extends React.Component {
     this.setState({ query: event.target.value });
   };
 
-  clickHandler = async () => {
-    const response = await fetch(
-      "http://api.tvmaze.com/search/shows?q=" + this.state.query
-    );
-    const data = await response.json();
-    this.setState({ movies: data });
+  clickHandler = () => {
+    this.setState(({ hasSearched }) => {
+      return { hasSearched: !hasSearched };
+    });
   };
 
   render() {
     return (
       <div className="main">
         <p className="title">TV Maze</p>
-        <Search onChange={this.changeHandler} onClick={this.clickHandler} />
-        <Results movies={this.state.movies} />
+        {this.state.hasSearched ? (
+          <SearchResult query={this.state.query} onClick={this.clickHandler} />
+        ) : (
+          <SearchBar
+            onChange={this.changeHandler}
+            onClick={this.clickHandler}
+          />
+        )}
       </div>
     );
   }
