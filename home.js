@@ -23,8 +23,8 @@ class Home extends React.Component {
     return (
       <div className="main">
         <p className="title">TV Maze</p>
-        <Search onChange={this.changeHandler} onClick={this.clickHandler} />
-        <Results movies={this.state.movies} />
+        <SearchBar onChange={this.changeHandler} onClick={this.clickHandler} />
+        <SearchResult movies={this.state.movies} />
       </div>
     );
   }

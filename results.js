@@ -1,4 +1,4 @@
-class Results extends React.Component {
+class SearchResult extends React.Component {
   render() {
     let { movies } = this.props;
     movies = movies.map(movie => (
